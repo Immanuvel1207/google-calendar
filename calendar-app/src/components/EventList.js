@@ -23,7 +23,8 @@ const EventList = ({ events, onEventClick, eventCategories }) => {
       <div className="event-details">
         <div className="event-title">{event.title}</div>
         <div className="event-time">
-          {dayjs(event.date).format("MMM D, YYYY")} • {event.startTime} - {event.endTime}
+          {dayjs(event.date).format("MMM D, YYYY")} •{" "}
+          {event.type === "birthday" ? "All Day" : `${event.startTime} - ${event.endTime}`}
         </div>
         {event.location && <div className="event-location">📍 {event.location}</div>}
       </div>

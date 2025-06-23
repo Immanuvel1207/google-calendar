@@ -14,7 +14,10 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
     location: "",
     attendees: "",
     reminder: 15,
+    image: null,
   })
+
+  const [imagePreview, setImagePreview] = useState(null)
 
   useEffect(() => {
     if (event) {
@@ -29,7 +32,11 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
         location: event.location || "",
         attendees: event.attendees ? event.attendees.join(", ") : "",
         reminder: event.reminder || 15,
+        image: event.image || null,
       })
+      if (event.image) {
+        setImagePreview(event.image)
+      }
     } else if (selectedDate) {
       setFormData((prev) => ({
         ...prev,
@@ -42,12 +49,22 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
     e.preventDefault()
     if (!formData.title.trim()) return
 
-    const eventData = {
+    let eventData = {
       ...formData,
       attendees: formData.attendees
         .split(",")
         .map((email) => email.trim())
         .filter((email) => email),
+    }
+
+    if (formData.type === "birthday") {
+      eventData = {
+        ...eventData,
+        startTime: "00:00",
+        endTime: "23:59",
+        reminder: 1080,
+        color: "#ff69b4",
+      }
     }
 
     onSave(eventData)
@@ -56,6 +73,19 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
   const handleDelete = () => {
     if (event && window.confirm("Are you sure you want to delete this event?")) {
       onDelete(event.id)
+    }
+  }
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const imageData = e.target.result
+        setFormData({ ...formData, image: imageData })
+        setImagePreview(imageData)
+      }
+      reader.readAsDataURL(file)
     }
   }
 
@@ -73,6 +103,8 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
     "#3f51b5",
     "#009688",
   ]
+
+  const isBirthday = formData.type === "birthday"
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -93,7 +125,7 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
                 className="form-input"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                placeholder="Enter event title"
+                placeholder={isBirthday ? "Enter person's name" : "Enter event title"}
                 required
               />
             </div>
@@ -125,67 +157,75 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
               </div>
             </div>
 
-            <div className="form-row">
+            {!isBirthday && (
+              <div className="form-row">
+                <div className="form-group">
+                  <label className="form-label">Start Time</label>
+                  <input
+                    type="time"
+                    className="form-input"
+                    value={formData.startTime}
+                    onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">End Time</label>
+                  <input
+                    type="time"
+                    className="form-input"
+                    value={formData.endTime}
+                    onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
+                    required
+                  />
+                </div>
+              </div>
+            )}
+
+            {!isBirthday && (
               <div className="form-group">
-                <label className="form-label">Start Time</label>
+                <label className="form-label">Location</label>
                 <input
-                  type="time"
+                  type="text"
                   className="form-input"
-                  value={formData.startTime}
-                  onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
-                  required
+                  value={formData.location}
+                  onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                  placeholder="Enter location"
                 />
               </div>
+            )}
+
+            {!isBirthday && (
               <div className="form-group">
-                <label className="form-label">End Time</label>
+                <label className="form-label">Attendees (comma-separated emails)</label>
                 <input
-                  type="time"
+                  type="text"
                   className="form-input"
-                  value={formData.endTime}
-                  onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
-                  required
+                  value={formData.attendees}
+                  onChange={(e) => setFormData({ ...formData, attendees: e.target.value })}
+                  placeholder="email1@example.com, email2@example.com"
                 />
               </div>
-            </div>
+            )}
 
-            <div className="form-group">
-              <label className="form-label">Location</label>
-              <input
-                type="text"
-                className="form-input"
-                value={formData.location}
-                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                placeholder="Enter location"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Attendees (comma-separated emails)</label>
-              <input
-                type="text"
-                className="form-input"
-                value={formData.attendees}
-                onChange={(e) => setFormData({ ...formData, attendees: e.target.value })}
-                placeholder="email1@example.com, email2@example.com"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Reminder</label>
-              <select
-                className="form-select"
-                value={formData.reminder}
-                onChange={(e) => setFormData({ ...formData, reminder: Number.parseInt(e.target.value) })}
-              >
-                <option value={0}>No reminder</option>
-                <option value={5}>5 minutes before</option>
-                <option value={15}>15 minutes before</option>
-                <option value={30}>30 minutes before</option>
-                <option value={60}>1 hour before</option>
-                <option value={120}>2 hours before</option>
-                <option value={1440}>1 day before</option>
-              </select>
-            </div>
+            {!isBirthday && (
+              <div className="form-group">
+                <label className="form-label">Reminder</label>
+                <select
+                  className="form-select"
+                  value={formData.reminder}
+                  onChange={(e) => setFormData({ ...formData, reminder: Number.parseInt(e.target.value) })}
+                >
+                  <option value={0}>No reminder</option>
+                  <option value={5}>5 minutes before</option>
+                  <option value={15}>15 minutes before</option>
+                  <option value={30}>30 minutes before</option>
+                  <option value={60}>1 hour before</option>
+                  <option value={120}>2 hours before</option>
+                  <option value={1440}>1 day before</option>
+                </select>
+              </div>
+            )}
 
             <div className="form-group">
               <label className="form-label">Color</label>
@@ -202,12 +242,33 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
             </div>
 
             <div className="form-group">
+              <label className="form-label">Event Image (Optional)</label>
+              <div
+                className={`image-upload ${imagePreview ? "has-image" : ""}`}
+                onClick={() => document.getElementById("image-input").click()}
+              >
+                <input
+                  id="image-input"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  style={{ display: "none" }}
+                />
+                {imagePreview ? (
+                  <img src={imagePreview || "/placeholder.svg"} alt="Event preview" className="image-preview" />
+                ) : (
+                  <div className="upload-text">📷 Click to upload an image</div>
+                )}
+              </div>
+            </div>
+
+            <div className="form-group">
               <label className="form-label">Description</label>
               <textarea
                 className="form-textarea"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Enter event description"
+                placeholder={isBirthday ? "Birthday wishes or notes" : "Enter event description"}
                 rows="4"
               />
             </div>
