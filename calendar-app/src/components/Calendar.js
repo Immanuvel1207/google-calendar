@@ -242,7 +242,7 @@ const Calendar = ({ onTabChange }) => {
       })
     }
 
-    const interval = setInterval(checkReminders, 60000) // Check every minute
+    const interval = setInterval(checkReminders, 60000) 
     return () => clearInterval(interval)
   }, [events])
 
@@ -255,7 +255,6 @@ const Calendar = ({ onTabChange }) => {
 
     setNotifications((prev) => [...prev, notification])
 
-    // Auto remove after 10 seconds
     setTimeout(() => {
       setNotifications((prev) => prev.filter((n) => n.id !== notification.id))
     }, 10000)
@@ -275,7 +274,7 @@ const Calendar = ({ onTabChange }) => {
         notification.close()
       }
 
-      // Auto close after 10 seconds
+
       setTimeout(() => {
         notification.close()
       }, 10000)
