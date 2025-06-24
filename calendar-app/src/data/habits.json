@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Morning Exercise",
+    "description": "30 minutes of cardio or strength training",
+    "activeDays": [1, 2, 3, 4, 5],
+    "progress": {},
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "title": "Daily Reading",
+    "description": "Read for at least 20 minutes every day",
+    "activeDays": [0, 1, 2, 3, 4, 5, 6],
+    "progress": {},
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "Meditation",
+    "description": "10 minutes of mindfulness meditation",
+    "activeDays": [0, 1, 2, 3, 4, 5, 6],
+    "progress": {},
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "title": "Code Practice",
+    "description": "Practice coding or work on personal projects",
+    "activeDays": [1, 2, 3, 4, 5],
+    "progress": {},
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "title": "Gratitude Journal",
+    "description": "Write down 3 things you're grateful for",
+    "activeDays": [0, 6],
+    "progress": {},
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  }
+]

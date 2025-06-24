@@ -148,26 +148,3 @@ code {
     border: 1px solid #000;
   }
 }
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #1a1a1a;
-    color: #ffffff;
-  }
-
-  .calendar-header,
-  .calendar-sidebar,
-  .calendar-content,
-  .event-list-container {
-    background-color: #2d2d2d;
-    border-color: #404040;
-  }
-
-  .form-input,
-  .form-select,
-  .form-textarea {
-    background-color: #404040;
-    border-color: #606060;
-    color: #ffffff;
-  }
-}

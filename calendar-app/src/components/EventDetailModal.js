@@ -30,24 +30,24 @@ const EventDetailModal = ({ event, onEdit, onDelete, onClose }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content event-detail-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
+        <header className="modal-header">
           <h3 className="modal-title">{event.title}</h3>
-          <button className="close-button" onClick={onClose}>
+          <button className="close-button" onClick={onClose} aria-label="Close modal">
             ✕
           </button>
-        </div>
+        </header>
 
         <div className="modal-body">
           {event.image && <img src={event.image || "/placeholder.svg"} alt={event.title} className="event-image" />}
 
           <div className="form-group">
-            <label className="form-label">Date & Time</label>
+            <div className="form-label">Date & Time</div>
             <div
               style={{
-                padding: "12px 16px",
-                background: "#f8fafc",
-                borderRadius: "8px",
-                fontSize: "14px",
+                padding: "0.75rem 1rem",
+                background: "var(--gray-50)",
+                borderRadius: "var(--radius-md)",
+                fontSize: "0.875rem",
                 fontWeight: "500",
               }}
             >
@@ -57,13 +57,13 @@ const EventDetailModal = ({ event, onEdit, onDelete, onClose }) => {
 
           {event.location && (
             <div className="form-group">
-              <label className="form-label">Location</label>
+              <div className="form-label">Location</div>
               <div
                 style={{
-                  padding: "12px 16px",
-                  background: "#f8fafc",
-                  borderRadius: "8px",
-                  fontSize: "14px",
+                  padding: "0.75rem 1rem",
+                  background: "var(--gray-50)",
+                  borderRadius: "var(--radius-md)",
+                  fontSize: "0.875rem",
                   fontWeight: "500",
                 }}
               >
@@ -74,13 +74,13 @@ const EventDetailModal = ({ event, onEdit, onDelete, onClose }) => {
 
           {event.attendees && event.attendees.length > 0 && (
             <div className="form-group">
-              <label className="form-label">Attendees</label>
+              <div className="form-label">Attendees</div>
               <div
                 style={{
-                  padding: "12px 16px",
-                  background: "#f8fafc",
-                  borderRadius: "8px",
-                  fontSize: "14px",
+                  padding: "0.75rem 1rem",
+                  background: "var(--gray-50)",
+                  borderRadius: "var(--radius-md)",
+                  fontSize: "0.875rem",
                   fontWeight: "500",
                 }}
               >
@@ -90,13 +90,13 @@ const EventDetailModal = ({ event, onEdit, onDelete, onClose }) => {
           )}
 
           <div className="form-group">
-            <label className="form-label">Reminder</label>
+            <div className="form-label">Reminder</div>
             <div
               style={{
-                padding: "12px 16px",
-                background: "#f8fafc",
-                borderRadius: "8px",
-                fontSize: "14px",
+                padding: "0.75rem 1rem",
+                background: "var(--gray-50)",
+                borderRadius: "var(--radius-md)",
+                fontSize: "0.875rem",
                 fontWeight: "500",
               }}
             >
@@ -106,13 +106,13 @@ const EventDetailModal = ({ event, onEdit, onDelete, onClose }) => {
 
           {event.description && (
             <div className="form-group">
-              <label className="form-label">Description</label>
+              <div className="form-label">Description</div>
               <div
                 style={{
-                  padding: "12px 16px",
-                  background: "#f8fafc",
-                  borderRadius: "8px",
-                  fontSize: "14px",
+                  padding: "0.75rem 1rem",
+                  background: "var(--gray-50)",
+                  borderRadius: "var(--radius-md)",
+                  fontSize: "0.875rem",
                   lineHeight: "1.6",
                 }}
               >
@@ -122,14 +122,14 @@ const EventDetailModal = ({ event, onEdit, onDelete, onClose }) => {
           )}
 
           <div className="form-group">
-            <label className="form-label">Category</label>
+            <div className="form-label">Category</div>
             <div
               style={{
-                padding: "12px 16px",
+                padding: "0.75rem 1rem",
                 background: event.color,
                 color: "white",
-                borderRadius: "8px",
-                fontSize: "14px",
+                borderRadius: "var(--radius-md)",
+                fontSize: "0.875rem",
                 fontWeight: "600",
                 textAlign: "center",
               }}
@@ -139,7 +139,7 @@ const EventDetailModal = ({ event, onEdit, onDelete, onClose }) => {
           </div>
         </div>
 
-        <div className="modal-footer">
+        <footer className="modal-footer">
           <button type="button" className="delete-button" onClick={handleDelete}>
             Delete Event
           </button>
@@ -152,7 +152,7 @@ const EventDetailModal = ({ event, onEdit, onDelete, onClose }) => {
               Edit Event
             </button>
           </div>
-        </div>
+        </footer>
       </div>
     </div>
   )

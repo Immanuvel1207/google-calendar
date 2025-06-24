@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Complete Q1 Project Deliverables",
+    "description": "Finish all major project milestones and deliverables for the first quarter",
+    "priority": "high",
+    "completed": false,
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "title": "Learn New Programming Framework",
+    "description": "Master React Native or Vue.js to expand technical skills",
+    "priority": "medium",
+    "completed": false,
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "Improve Team Communication",
+    "description": "Implement better communication strategies and tools for team collaboration",
+    "priority": "high",
+    "completed": true,
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "title": "Health and Fitness Goals",
+    "description": "Maintain regular exercise routine and healthy eating habits",
+    "priority": "medium",
+    "completed": false,
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "title": "Financial Planning Review",
+    "description": "Review and update budget, savings goals, and investment portfolio",
+    "priority": "high",
+    "completed": false,
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "title": "Professional Development",
+    "description": "Attend conferences, workshops, or online courses for skill enhancement",
+    "priority": "medium",
+    "completed": false,
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  }
+]

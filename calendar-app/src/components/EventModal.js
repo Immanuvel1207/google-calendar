@@ -9,7 +9,7 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
     startTime: "",
     endTime: "",
     description: "",
-    color: "#4285f4",
+    color: "#6366f1",
     type: "meeting",
     location: "",
     attendees: "",
@@ -62,8 +62,8 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
         ...eventData,
         startTime: "00:00",
         endTime: "23:59",
-        reminder: 1080,
-        color: "#ff69b4",
+        reminder: 1440, // 1 day before
+        color: "#ec4899",
       }
     }
 
@@ -90,18 +90,16 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
   }
 
   const colorOptions = [
-    "#4285f4",
-    "#ea4335",
-    "#34a853",
-    "#fbbc04",
-    "#ff9800",
-    "#9c27b0",
-    "#00bcd4",
-    "#795548",
-    "#607d8b",
-    "#e91e63",
-    "#3f51b5",
-    "#009688",
+    "#6366f1",
+    "#ef4444",
+    "#10b981",
+    "#f59e0b",
+    "#8b5cf6",
+    "#06b6d4",
+    "#84cc16",
+    "#ec4899",
+    "#3b82f6",
+    "#6b7280",
   ]
 
   const isBirthday = formData.type === "birthday"
@@ -109,18 +107,21 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header">
+        <header className="modal-header">
           <h3 className="modal-title">{event ? "Edit Event" : "Create Event"}</h3>
-          <button className="close-button" onClick={onClose}>
+          <button className="close-button" onClick={onClose} aria-label="Close modal">
             ✕
           </button>
-        </div>
+        </header>
 
         <form onSubmit={handleSubmit}>
           <div className="modal-body">
             <div className="form-group">
-              <label className="form-label">Event Title</label>
+              <label htmlFor="event-title" className="form-label">
+                Event Title
+              </label>
               <input
+                id="event-title"
                 type="text"
                 className="form-input"
                 value={formData.title}
@@ -132,8 +133,11 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
 
             <div className="form-row">
               <div className="form-group">
-                <label className="form-label">Date</label>
+                <label htmlFor="event-date" className="form-label">
+                  Date
+                </label>
                 <input
+                  id="event-date"
                   type="date"
                   className="form-input"
                   value={formData.date}
@@ -142,8 +146,11 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Event Type</label>
+                <label htmlFor="event-type" className="form-label">
+                  Event Type
+                </label>
                 <select
+                  id="event-type"
                   className="form-select"
                   value={formData.type}
                   onChange={(e) => setFormData({ ...formData, type: e.target.value })}
@@ -160,23 +167,29 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
             {!isBirthday && (
               <div className="form-row">
                 <div className="form-group">
-                  <label className="form-label">Start Time</label>
+                  <label htmlFor="start-time" className="form-label">
+                    Start Time
+                  </label>
                   <input
+                    id="start-time"
                     type="time"
                     className="form-input"
                     value={formData.startTime}
                     onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
-                    required
+                    required={!isBirthday}
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">End Time</label>
+                  <label htmlFor="end-time" className="form-label">
+                    End Time
+                  </label>
                   <input
+                    id="end-time"
                     type="time"
                     className="form-input"
                     value={formData.endTime}
                     onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
-                    required
+                    required={!isBirthday}
                   />
                 </div>
               </div>
@@ -184,8 +197,11 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
 
             {!isBirthday && (
               <div className="form-group">
-                <label className="form-label">Location</label>
+                <label htmlFor="event-location" className="form-label">
+                  Location
+                </label>
                 <input
+                  id="event-location"
                   type="text"
                   className="form-input"
                   value={formData.location}
@@ -197,8 +213,11 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
 
             {!isBirthday && (
               <div className="form-group">
-                <label className="form-label">Attendees (comma-separated emails)</label>
+                <label htmlFor="event-attendees" className="form-label">
+                  Attendees (comma-separated emails)
+                </label>
                 <input
+                  id="event-attendees"
                   type="text"
                   className="form-input"
                   value={formData.attendees}
@@ -210,8 +229,11 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
 
             {!isBirthday && (
               <div className="form-group">
-                <label className="form-label">Reminder</label>
+                <label htmlFor="event-reminder" className="form-label">
+                  Reminder
+                </label>
                 <select
+                  id="event-reminder"
                   className="form-select"
                   value={formData.reminder}
                   onChange={(e) => setFormData({ ...formData, reminder: Number.parseInt(e.target.value) })}
@@ -227,44 +249,30 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
               </div>
             )}
 
-            <div className="form-group">
-              <label className="form-label">Color</label>
-              <div className="color-picker">
+            <fieldset className="form-group">
+              <legend className="form-label">Color</legend>
+              <div className="color-picker" role="radiogroup">
                 {colorOptions.map((color) => (
-                  <div
+                  <button
                     key={color}
+                    type="button"
                     className={`color-option ${formData.color === color ? "selected" : ""}`}
                     style={{ backgroundColor: color }}
                     onClick={() => setFormData({ ...formData, color })}
+                    role="radio"
+                    aria-checked={formData.color === color}
+                    aria-label={`Select color ${color}`}
                   />
                 ))}
               </div>
-            </div>
+            </fieldset>
 
             <div className="form-group">
-              <label className="form-label">Event Image (Optional)</label>
-              <div
-                className={`image-upload ${imagePreview ? "has-image" : ""}`}
-                onClick={() => document.getElementById("image-input").click()}
-              >
-                <input
-                  id="image-input"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                  style={{ display: "none" }}
-                />
-                {imagePreview ? (
-                  <img src={imagePreview || "/placeholder.svg"} alt="Event preview" className="image-preview" />
-                ) : (
-                  <div className="upload-text">📷 Click to upload an image</div>
-                )}
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Description</label>
+              <label htmlFor="event-description" className="form-label">
+                Description
+              </label>
               <textarea
+                id="event-description"
                 className="form-textarea"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -274,7 +282,7 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
             </div>
           </div>
 
-          <div className="modal-footer">
+          <footer className="modal-footer">
             {event && (
               <button type="button" className="delete-button" onClick={handleDelete}>
                 Delete Event
@@ -289,7 +297,7 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
                 {event ? "Update Event" : "Create Event"}
               </button>
             </div>
-          </div>
+          </footer>
         </form>
       </div>
     </div>
