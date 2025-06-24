@@ -1,4 +1,3 @@
-"use client"
 
 const NotificationSystem = ({ notifications, onDismiss, getEventEmoji }) => {
   if (notifications.length === 0) return null
