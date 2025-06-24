@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -24,7 +24,11 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>TickTide</title>
+
+<!-- Change the tab image (favicon) -->
+    <link rel="icon" href="data:image/png;base64,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" />
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
