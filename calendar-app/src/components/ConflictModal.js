@@ -1,4 +1,3 @@
-"use client"
 
 import { useState } from "react"
 import dayjs from "dayjs"
@@ -153,15 +152,15 @@ const ConflictModal = ({ conflictData, onResolve, onClose }) => {
             </div>
 
             <div className="conflict-actions">
-              <button className="priority-button priority-high" onClick={() => handlePriorityChoice("high")}>
+              {/* <button className="priority-button priority-high" onClick={() => handlePriorityChoice("high")}>
                 🔥 High Priority
                 <div style={{ fontSize: "0.75rem", opacity: "0.8" }}>Make new event more important</div>
-              </button>
+              </button> */}
 
-              <button className="priority-button priority-low" onClick={() => handlePriorityChoice("low")}>
+              {/* <button className="priority-button priority-low" onClick={() => handlePriorityChoice("low")}>
                 📋 Normal Priority
                 <div style={{ fontSize: "0.75rem", opacity: "0.8" }}>Keep existing event priority</div>
-              </button>
+              </button> */}
 
               <button className="priority-button edit-both-button" onClick={handleEditBoth}>
                 ✏️ Edit Times

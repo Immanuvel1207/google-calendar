@@ -1,4 +1,3 @@
-"use client"
 
 import { useState, useCallback, useEffect } from "react"
 import dayjs from "dayjs"
@@ -242,7 +241,7 @@ const Calendar = ({ onTabChange }) => {
       })
     }
 
-    const interval = setInterval(checkReminders, 60000) 
+    const interval = setInterval(checkReminders, 60000)
     return () => clearInterval(interval)
   }, [events])
 
@@ -273,7 +272,6 @@ const Calendar = ({ onTabChange }) => {
         window.focus()
         notification.close()
       }
-
 
       setTimeout(() => {
         notification.close()
@@ -469,13 +467,9 @@ const Calendar = ({ onTabChange }) => {
 
   const handleDateClick = (date) => {
     setSelectedDate(date)
-    const dayEvents = getEventsForDate(date).filter(
-      (event) => !event.type || (event.type !== "national" && event.type !== "state"),
-    )
-    if (dayEvents.length === 0) {
-      setSelectedEvent(null)
-      setShowEventModal(true)
-    }
+    // Always allow adding new events by clicking on any day
+    setSelectedEvent(null)
+    setShowEventModal(true)
   }
 
   const handleEventClick = (event, e) => {
