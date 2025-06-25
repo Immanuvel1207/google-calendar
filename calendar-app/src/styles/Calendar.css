@@ -536,7 +536,7 @@ body {
   position: relative;
 }
 
-/* Beautiful Green Background with Single Image Fit */
+
 .calendar-content::before {
   content: "";
   position: absolute;
@@ -651,7 +651,7 @@ body {
 
 .calendar-grid-container {
   flex: 1;
-  /* padding: 0.2rem 1rem 0.2rem; */
+
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -736,7 +736,6 @@ body {
 }
 
 .calendar-day.selected {
-  /* background: rgba(34, 197, 94, 0.089); */
   border: 2px solid rgba(34, 197, 94, 0.9);
   box-shadow: 0 0 25px rgba(34, 197, 94, 0.4);
 }
@@ -760,14 +759,14 @@ body {
 }
 
 .day-number.today {
-  /* color: var(--success-700); */
+
   color: white;
   font-weight: 800;
   text-shadow: 0 1px 3px rgba(22, 135, 18, 0.9);
 }
 
 .day-number.holiday {
-  /* color: var(--success-700); */
+
   color: rgb(1, 85, 1);
   font-weight: 700;
 }
@@ -1799,7 +1798,7 @@ body {
   max-height: 120px;
 }
 
-/* Responsive Design - Mobile First Approach */
+
 @media (max-width: 480px) {
   .calendar-sidebar,
   .event-list-content,

@@ -61,7 +61,7 @@ const EventModal = ({ event, selectedDate, onSave, onDelete, onClose, eventCateg
         ...eventData,
         startTime: "00:00",
         endTime: "23:59",
-        reminder: 1440, // 1 day before
+        reminder: 1440, 
         color: "#ec4899",
       }
     }

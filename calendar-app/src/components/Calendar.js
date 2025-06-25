@@ -67,7 +67,6 @@ const Calendar = ({ onTabChange }) => {
     }
   }, [])
 
-  // Fetch daily quote (one per day)
   useEffect(() => {
     const fetchDailyQuote = async () => {
       const today = dayjs().format("YYYY-MM-DD")
@@ -80,10 +79,10 @@ const Calendar = ({ onTabChange }) => {
       }
 
       try {
-        const response = await fetch("https://api.quotable.io/random?tags=motivational,inspirational,success")
+        const response = await fetch("https://quotes-api-self.vercel.app/quote")
         const data = await response.json()
         const quote = {
-          quote: data.content,
+          quote: data.quote,
           author: data.author,
         }
         setCurrentQuote(quote)
@@ -103,18 +102,17 @@ const Calendar = ({ onTabChange }) => {
     fetchDailyQuote()
   }, [])
 
-  // Fetch Tamil Nadu holidays (national + state)
+
   useEffect(() => {
     const fetchTamilNaduHolidays = async () => {
       setIsLoadingHolidays(true)
       try {
         const currentYear = new Date().getFullYear()
 
-        // Fetch national Indian holidays
         const response = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${currentYear}/IN`)
         const nationalHolidays = await response.json()
 
-        // Add Tamil Nadu specific holidays
+
         const tamilNaduHolidays = [
           {
             id: "pongal-1",
@@ -166,7 +164,6 @@ const Calendar = ({ onTabChange }) => {
           },
         ]
 
-        // Format national holidays
         const formattedNationalHolidays = nationalHolidays.map((holiday, index) => ({
           id: `national-${index}`,
           title: holiday.name,
@@ -176,12 +173,11 @@ const Calendar = ({ onTabChange }) => {
           description: `National Holiday: ${holiday.name}`,
         }))
 
-        // Combine all holidays
+
         const allHolidays = [...formattedNationalHolidays, ...tamilNaduHolidays]
         setHolidays(allHolidays)
       } catch (error) {
         console.error("Failed to fetch holidays:", error)
-        // Fallback holidays
         const fallbackHolidays = [
           {
             id: "republic-day",
@@ -225,7 +221,6 @@ const Calendar = ({ onTabChange }) => {
     fetchTamilNaduHolidays()
   }, [])
 
-  // Check for event reminders and show desktop notifications
   useEffect(() => {
     const checkReminders = () => {
       const now = dayjs()
@@ -467,7 +462,6 @@ const Calendar = ({ onTabChange }) => {
 
   const handleDateClick = (date) => {
     setSelectedDate(date)
-    // Always allow adding new events by clicking on any day
     setSelectedEvent(null)
     setShowEventModal(true)
   }

@@ -186,7 +186,6 @@ const Priorities = ({ onTabChange }) => {
   const reportData = getReportData()
   const currentWeek = getWeekKey()
 
-  // Sort priorities based on priority level
   const priorityOrder = { high: 1, medium: 2, low: 3 }
   const sortedPriorities = [...priorities].sort((a, b) => {
     return (priorityOrder[a.priority] || 4) - (priorityOrder[b.priority] || 4)
@@ -227,7 +226,7 @@ const Priorities = ({ onTabChange }) => {
       </header>
 
       <main className="priorities-main">
-        {/* Priorities Section */}
+        
         <section className="priorities-section" aria-labelledby="priorities-heading">
           <div className="section-header">
             <h2 id="priorities-heading" className="section-title">🎯 Weekly Priorities</h2>
@@ -254,7 +253,6 @@ const Priorities = ({ onTabChange }) => {
           </div>
         </section>
 
-        {/* Habits Section */}
         <section className="habits-section" aria-labelledby="habits-heading">
           <div className="section-header">
             <h2 id="habits-heading" className="section-title">📊 Habit Tracker</h2>
@@ -302,7 +300,7 @@ const Priorities = ({ onTabChange }) => {
         </section>
       </main>
 
-      {/* Modals */}
+
       {showPriorityModal && (
         <PriorityModal
           priority={selectedPriority}
